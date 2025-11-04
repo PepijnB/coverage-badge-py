@@ -17,7 +17,7 @@ inputs:
   install_cmd:
     description: 'Command to install coverage-badge (pip or uv)'
     required: false
-    default: 'pip install'
+    default: 'pip install -U'
 
 runs:
   using: 'composite'
@@ -25,7 +25,7 @@ runs:
     - id: coverage-badge
       working-directory: ${{ inputs.working-directory }}
       run: |
-        ${{ inputs.install_cmd }} -U setuptools coverage-badge
+        ${{ inputs.install_cmd }} setuptools coverage-badge
         
         EXTRA_ARGS=""
 
