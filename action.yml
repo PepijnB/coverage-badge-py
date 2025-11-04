@@ -14,6 +14,10 @@ inputs:
     description: 'Current working directory'
     required: false
     default: '.'
+  install_cmd:
+    description: 'Command to install coverage-badge (pip or uv)'
+    required: false
+    default: 'pip install'
 
 runs:
   using: 'composite'
@@ -21,7 +25,8 @@ runs:
     - id: coverage-badge
       working-directory: ${{ inputs.working-directory }}
       run: |
-        pip install -U setuptools coverage-badge
+        ${{ inputs.install_cmd }} -U setuptools coverage-badge
+        
         EXTRA_ARGS=""
 
         if [[ '${{ inputs.overwrite }}' == 'true'  ]]; then
